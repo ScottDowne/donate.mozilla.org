@@ -1,7 +1,7 @@
 var React = require('react');
 var Route = require('react-router').Route;
-var paths = require('./paths.js');
-var currencies = require('./currencies.js').paths;
+var paths = require('../scripts/paths.js');
+var currencies = require('../scripts/currencies.js').paths;
 var pathsArray = Object.keys(paths).concat(currencies);
 
 var routes = (
