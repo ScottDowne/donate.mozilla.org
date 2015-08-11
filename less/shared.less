@@ -691,8 +691,7 @@ form#contribution input {
 }
 
 /* Parsley.js / Validation Styling */
-.parsley-errors-list,
-#one-line-error {
+.error-msg {
   font-size: 12px;
   margin: 0;
 }
@@ -704,10 +703,7 @@ form#signup {
   }
 }
 
-#amount-error-msg .parsley-errors-list,
-#amount-other-error-msg .parsley-errors-list,
-#payment-type-error-msg .parsley-errors-list,
-#privacy-error-msg .parsley-errors-list {
+.error-msg {
   display: block;
   list-style: none;
   padding-left: 0;
@@ -718,18 +714,7 @@ form#signup {
   margin-bottom: 0;
 }
 
-input.parsley-error,
-input.parsley-error:focus,
-select.parsley-error,
-select.parsley-error:focus {
-  border-color: #C13832;
-}
-
-.parsley-errors-list *,
-.parsley-required,
-.parsley-type,
-.parsley-custom-error-message,
-#one-line-error {
+.error-msg {
   color: #C13832;
 }
 
@@ -852,40 +837,8 @@ ol.progress li.active::before {
   color: #ffffff;
 }
 
-[data-button-type="next"] {
-  border: 0 transparent dashed;
-  background: #C13832;
-  color: #ffffff;
-  float: right;
-  font-size: 1.375rem;
-  margin-right: 1.5rem;
-  margin-top: 1rem;
-  padding: 0.75rem 1rem;
-  position: relative;
-  height: 46px;
-}
-
-[data-button-type="next"]:hover, [data-button-type="next"]:active, [data-button-type="next"]:focus {
-  background: #EA3B28;
-  outline: none;
-}
-
 .hidden-visibility {
   visibility: hidden;
-}
-
-[data-button-type="next"]::before {
-  border-top: 23px solid transparent;
-  border-bottom: 23px solid transparent;
-  border-left: 23px dashed #C13832;
-  position: absolute;
-  content: '';
-  right: -23px;
-  top: 0;
-}
-
-[data-button-type="next"]:hover::before, [data-button-type="next"]:active::before , [data-button-type="next"]:focus::before {
-  border-left-color: #EA3B28;
 }
 
 

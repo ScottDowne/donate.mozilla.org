@@ -1,0 +1,21 @@
+.sequence-page {
+  border: 0 dashed transparent;
+  left: 0;
+  position: absolute;
+  transition: left 500ms;
+  width: 100%;
+
+  &.page-hidden-complete {
+    left: -100%;
+  }
+
+  &.page-hidden-incomplete {
+    left: 100%;
+  }
+}
+
+.sequence-page-container {
+  height: 271px;
+  overflow: hidden;
+  position: relative;
+}

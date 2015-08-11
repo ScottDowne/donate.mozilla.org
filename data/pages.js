@@ -23,6 +23,11 @@ var pages = {
     name: "one-page",
     path: "/one-page/?",
     handler: require('../pages/single-form.jsx')
+  },
+  "/new-sequential": {
+    name: "new-sequential",
+    path: "/new-sequential/?",
+    handler: require('../pages/new-sequential.jsx')
   }
 };
 
