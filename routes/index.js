@@ -31,7 +31,7 @@ var routes = {
   },
   'stripe': function(request, reply) {
     var transaction = request.payload || {};
-    if (transaction.recurring === 0) {
+    if (transaction.frequency === 'single') {
       stripe.single({
         amount: transaction.amount,
         currency: transaction.currency,
@@ -80,7 +80,7 @@ var routes = {
   },
   'paypal': function(request, reply) {
     var transaction = request.payload || {};
-    if (transaction.recurring === 0) {
+    if (transaction.frequency === "single") {
       paypal.setupSingle({
         amount: transaction.amount,
         currency: transaction.currency,
