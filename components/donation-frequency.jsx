@@ -32,7 +32,7 @@ module.exports = React.createClass({
       <div>
         <div className="row" id="recurring-option-row">
           <div className="half">
-            <input name="recurring_acknowledge" checked={frequency === "single"}
+            <input name="recurring_acknowledge" checked={frequency !== "monthly"}
               onChange={this.onChange} type="radio" value="0" id="one-time-payment"
             />
             <label htmlFor="one-time-payment" className="medium-label-size">{this.getIntlMessage('one_time')}</label>
