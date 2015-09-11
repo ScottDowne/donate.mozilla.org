@@ -80,7 +80,7 @@ var routes = {
   },
   'paypal': function(request, reply) {
     var transaction = request.payload || {};
-    if (transaction.frequency === "single") {
+    if (transaction.frequency === 'single') {
       paypal.setupSingle({
         amount: transaction.amount,
         currency: transaction.currency,
