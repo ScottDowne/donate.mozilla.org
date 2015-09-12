@@ -31,6 +31,11 @@ var AmountOtherButton = React.createClass({
   onInputClick: function() {
     document.querySelector("#amount-other").click();
   },
+  clearOtherAmount: function() {
+    if (!this.props.checked) {
+      this.props.clearOtherAmount();
+    }
+  },
   render: function() {
     return (
       <div className="two-third">
@@ -38,7 +43,7 @@ var AmountOtherButton = React.createClass({
           <input id="amount-other" type="radio" name="donation_amount"
             checked={this.props.checked}
             onClick={this.onRadioClick}
-            onChange={this.props.onRadioChange}
+            onChange={this.clearOtherAmount}
             value={this.props.amount}
           />
           <label htmlFor="amount-other" className="large-label-size">
@@ -87,10 +92,8 @@ var AmountButtons = React.createClass({
       amount: amount
     });
   },
-  otherRadioChange: function() {
-    if (!this.state.userInputting) {
-      this.setAmount("", true);
-    }
+  clearOtherAmount: function() {
+    this.setAmount("", true);
   },
   otherInputChange: function(e) {
     var newAmount = e.currentTarget.value;
@@ -169,7 +172,7 @@ var AmountButtons = React.createClass({
           <AmountOtherButton amount={otherAmount}
             currencySymbol={currency.symbol}
             checked={userInputting}
-            onRadioChange={this.otherRadioChange}
+            clearOtherAmount={this.clearOtherAmount}
             onInputChange={this.otherInputChange}
             placeholder={this.getIntlMessage('other_amount')}
           />
