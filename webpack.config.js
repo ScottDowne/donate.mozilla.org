@@ -47,7 +47,7 @@ module.exports = {
       Router.run(routes, outputPath, function (Handler) {
         var values = {
           currency: currencies['usd'],
-          presets: currencies['usd'].presets,
+          presets: currencies['usd'].presets['single'],
           currencies: currencies
         };
         var index = React.createFactory(require('./pages/index.jsx'));

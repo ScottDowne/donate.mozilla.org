@@ -11,9 +11,17 @@ module.exports = {
       amount = this.props.queryString.amount || "";
       frequency = this.props.queryString.frequency || frequency;
     }
+    var presets = this.props.presets;
+    var currency = this.props.currency;
+    if (presets && presets.length !== 4) {
+      presets = currency.presets[frequency];
+    }
+
     return {
       paymentType: "",
       submitting: false,
+      presets: presets,
+      currency: currency,
       props: {
         amount: {
           values: {
@@ -58,9 +66,9 @@ module.exports = {
     });
   },
   onChange: function(name, value, field) {
-    var newState = this.state;
+    var newState = {};
     newState[name] = value;
-    if (field && newState.errors[name] && newState.errors[name][field]) {
+    if (field && this.state.errors[name] && this.state.errors[name][field]) {
       newState.errors[name][field] = "";
     }
     this.setState(newState);
@@ -77,18 +85,24 @@ module.exports = {
       props: newProps
     });
   },
+  onFrequencyChange: function(name, value, values) {
+    if (values) {
+      this.setState({
+        presets: this.state.currency.presets[values.frequency]
+      });
+    }
+    this.updateFormField(name, value, values);
+  },
   onCurrencyChanged: function(e) {
     var value = e.currentTarget.value;
     var currencies = this.props.currencies;
     var currency = currencies[value] || this.state.currency;
-    var presets = currency.presets;
-    this.transitionTo(document.location.pathname, {}, {
-      currency: currency.code,
-      presets: presets.join(",")
-    });
+    var presets = currency.presets[this.state.props.frequency.values.frequency];
     var newProps = this.state.props;
     newProps.amount.values.amount = "";
     this.setState({
+      presets: presets,
+      currency: currency,
       props: newProps
     });
   },
@@ -176,7 +190,7 @@ module.exports = {
     this.transitionTo('/' + this.props.locales[0] + '/thank-you/?' + params);
   },
   stripeError: function(error) {
-    var newState = this.state;
+    var newState = {};
     var cardErrorCodes = {
       "invalid_number": {
         name: "creditCardInfo",
@@ -227,12 +241,12 @@ module.exports = {
     var cardError = cardErrorCodes[error.code];
     newState.submitting = false;
     if (error.rawType === "card_error" && cardError) {
-      if (newState.errors[cardError.name].page < newState.activePage) {
+      if (this.state.errors[cardError.name].page < this.state.activePage) {
         newState.activePage = newState.errors[cardError.name].page;
       }
       newState.errors[cardError.name][cardError.field] = cardError.message;
     } else {
-      if (newState.errors.other.page < newState.activePage) {
+      if (this.state.errors.other.page < this.state.activePage) {
         newState.activePage = newState.errors.other.page;
       }
       newState.errors.other.message = this.getIntlMessage('try_again_later');
