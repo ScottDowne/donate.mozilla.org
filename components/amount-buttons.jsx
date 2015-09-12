@@ -143,7 +143,8 @@ var AmountButtons = React.createClass({
     var presets = this.props.presets;
     var preset = presets.indexOf(amount);
     var userInputting = this.state.userInputting;
-    if (userInputting) {
+    if (userInputting || (amount && preset < 0)) {
+      userInputting = true;
       otherAmount = amount;
       amount = "";
     }
