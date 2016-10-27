@@ -1,5 +1,5 @@
 import React from 'react';
-import listener from '../lib/listener.js';
+//import listener from '../lib/listener.js';
 import form from '../lib/form.js';
 
 module.exports = React.createClass({
@@ -23,17 +23,17 @@ module.exports = React.createClass({
     };
   },
   componentDidMount: function() {
-    listener.on("formError", this.onError);
+    /*listener.on("formError", this.onError);
     listener.on("fieldUpdated", this.onFieldUpdated);
     form.registerField({
       name: this.props.name,
       element: this,
       field: this.props.field
-    });
+    });*/
   },
   componentWillUnmount: function() {
-    listener.off("formError", this.onError);
-    listener.off("fieldUpdated", this.onFieldUpdated);
+    //listener.off("formError", this.onError);
+    //listener.off("fieldUpdated", this.onFieldUpdated);
   },
   onError: function(e) {
     var detail = e.detail;

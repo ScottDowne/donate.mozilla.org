@@ -8,7 +8,7 @@ import DonateButton from '../components/donate-button.js';
 import {paypalLocales} from '../../intl-config.js';
 import amountModifier from '../lib/amount-modifier.js';
 
-import listener from '../lib/listener.js';
+//import listener from '../lib/listener.js';
 import form from '../lib/form.js';
 
 var PaypalForm = React.createClass({
@@ -22,12 +22,13 @@ var PaypalForm = React.createClass({
     };
   },
   componentDidMount: function() {
-    listener.on("fieldUpdated", this.onFieldUpdated);
-    listener.on("stateUpdated", this.onStateUpdated);
+// Make sure I deal with this. and it works.
+    //listener.on("fieldUpdated", this.onFieldUpdated);
+    //listener.on("stateUpdated", this.onStateUpdated);
   },
   componentWillUnmount: function() {
-    listener.off("fieldUpdated", this.onFieldUpdated);
-    listener.off("stateUpdated", this.onStateUpdated);
+    //listener.off("fieldUpdated", this.onFieldUpdated);
+    //listener.off("stateUpdated", this.onStateUpdated);
   },
   onFieldUpdated: function(e) {
     var detail = e.detail;
