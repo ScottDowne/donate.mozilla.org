@@ -3,20 +3,7 @@ Object.keys(require('../../public/locales.json')).forEach(function(locale) {
   locales[locale.toLowerCase()] = locale;
 });
 
-var locationParser = require('../../src/lib/location-parser.js')({
-  'en-US': {
-    nativeName: "English (US)",
-    englishName: "English (US)"
-  },
-  'de': {
-    nativeName: "Deutsch",
-    englishName: "German"
-  },
-  'fa-KE': {
-    nativeName: "Fake locale",
-    englishName: "Fake locale"
-  }
-}, locales);
+var locationParser = require('../../src/lib/location-parser.js')(require("langmap"), locales);
 var should = require('should');
 
 var tests = [

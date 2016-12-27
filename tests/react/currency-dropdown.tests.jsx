@@ -72,36 +72,4 @@ describe('currency-dropdown.jsx', function() {
       TestUtils.Simulate.change(testElement);
     });
   });
-
-  it('stateUpdated should default to usd data when currency dropdown changes to empty string', function() {
-    should.doesNotThrow(() => {
-      var Document = TestUtils.renderIntoDocument(<IntlStub><CurrencyDropdown/></IntlStub>);
-
-      function onStateUpdated(e) {
-        listener.off('stateUpdated', onStateUpdated);
-        should(e.detail.value.code).equal('usd');
-      }
-      listener.on('stateUpdated', onStateUpdated);
-
-      var testElement = ReactDOM.findDOMNode(Document);
-      testElement.value = "";
-      TestUtils.Simulate.change(testElement);
-    });
-  });
-
-  it('stateUpdated should default to usd data when currency dropdown changes to nonsense', function() {
-    should.doesNotThrow(() => {
-      var Document = TestUtils.renderIntoDocument(<IntlStub><CurrencyDropdown/></IntlStub>);
-
-      function onStateUpdated(e) {
-        listener.off('stateUpdated', onStateUpdated);
-        should(e.detail.value.code).equal('usd');
-      }
-      listener.on('stateUpdated', onStateUpdated);
-
-      var testElement = ReactDOM.findDOMNode(Document);
-      testElement.value = "nonsense";
-      TestUtils.Simulate.change(testElement);
-    });
-  });
 });
