@@ -12,7 +12,8 @@ var formMixin = {
     currency: React.PropTypes.object,
     presets: React.PropTypes.array,
     amount: React.PropTypes.string,
-    frequency: React.PropTypes.string
+    frequency: React.PropTypes.string,
+    error: React.PropTypes.string
   },
   getInitialState: function() {
     return {
@@ -31,6 +32,10 @@ var formMixin = {
 
     listener.on("fieldUpdated", this.onFieldUpdated);
     listener.on("stateUpdated", this.onStateUpdated);
+
+    if (this.props.error) {
+      this.formError(this.props.error);
+    }
   },
   componentWillUnmount: function() {
     listener.off("stateUpdated", this.onStateUpdated);
@@ -139,7 +144,7 @@ var formMixin = {
     var page = '/' + this.context.intl.locale + '/' + location + '/';
     window.location = page + params;
   },
-  stripeError: function(error) {
+  formError: function(error) {
     form.error("other", this.context.intl.formatMessage({id: 'try_again_later'}) + " [" + error + "]");
     this.setState({
       submitting: false
@@ -148,7 +153,7 @@ var formMixin = {
   stripeCheckout: function(validate, props) {
     var submit = this.submit;
     var success = this.stripeSuccess;
-    var error = this.stripeError;
+    var error = this.formError;
     var valid = form.validate(validate);
     var description = this.context.intl.formatMessage({id: "mozilla_donation"});
     var handlerDesc = this.context.intl.formatMessage({id: "donate_now"});
@@ -234,6 +239,7 @@ var formMixin = {
     var submitProps = {};
     var description = this.context.intl.formatMessage({id: "mozilla_donation"});
     var appName = this.props.appName;
+    var error = this.formError;
     if (valid) {
       this.setState({
         submitting: true
@@ -257,6 +263,8 @@ var formMixin = {
       submitProps.appName = appName || "mozillafoundation";
       this.submit("/api/paypal", submitProps, function(json) {
         window.location = json.endpoint + "/cgi-bin/webscr?cmd=_express-checkout&useraction=commit&token=" + json.token;
+      }, function(response) {
+        error(response.message);
       });
     }
   },

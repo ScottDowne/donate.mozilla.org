@@ -41,6 +41,7 @@ module.exports = function(queryString, locale) {
     amount: amount,
     frequency: frequency,
     email: queryString.email || "",
-    country: country
+    country: country,
+    error: queryString.error || "",
   };
 };

@@ -22,6 +22,7 @@ var onePage = React.createClass({
           amount={this.props.amount}
           frequency={this.props.frequency}
           country={this.props.country}
+          error={this.props.error}
         />
         <SmallPrint/>
         <MozillaFooter/>

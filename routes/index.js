@@ -352,7 +352,11 @@ var routes = {
             error_message: checkoutDetails.response.message,
             details: checkoutDetails.response.details
           });
-          return reply(boom.badRequest('donation failed', err));
+          location = "";
+          if (appName === "thunderbird") {
+            location = "thunderbird/";
+          }
+          return reply.redirect(`${locale}/${location}?error=${err.toString()}&frequency=${frequency}`);
         }
 
         request.log(['paypal', 'checkout-details', frequency], {
@@ -377,7 +381,11 @@ var routes = {
             }
 
             request.log(['error', 'paypal', 'checkout-payment', frequency], log_details);
-            return reply(boom.badRequest('donation failed', err));
+            location = "";
+            if (appName === "thunderbird") {
+              location = "thunderbird/";
+            }
+            return reply.redirect(`${locale}/${location}?error=${err.toString()}`);
           }
 
           request.log(['paypal', 'checkout', frequency], log_details);
